@@ -14,11 +14,35 @@ import { Player } from './ship.js';
 import { render } from './render.js';
 import { DOM } from './render.js';
 
-render.init();
-
 (function () {
-  // DOM.resetButton.addEventListener('click', resetGame);
-  // DOM.newGameButton.addEventListener('click', resetGame);
+  render.init();
+  const playerOne = new Player('playerOne');
+  const playerTwo = new Player('playerTwo');
+
+  playerOne.board.place([
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+  ]);
+  playerOne.board.place([
+    [2, 0],
+    [2, 1],
+    [2, 2],
+  ]);
+  playerTwo.board.place([
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+  ]);
+  playerTwo.board.place([
+    [2, 0],
+    [2, 1],
+    [2, 2],
+  ]);
+  render.update(playerOne);
+  render.update(playerTwo);
 
   document.addEventListener(
     'click',
@@ -26,10 +50,20 @@ render.init();
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
           if (event.target.matches('#P1' + i + j)) {
-            alert('#P1' + i + j);
+            if (render.currentPlayer === 2) {
+              console.log('Valid click 1');
+              playerOne.board.receiveHit([i, j]);
+              render.update(playerOne);
+              render.currentPlayer = 1;
+            }
           } else if (event.target.matches('#P2' + i + j)) {
             if (event.target.matches('#P2' + i + j)) {
-              alert('#P2' + i + j);
+              if (render.currentPlayer === 1) {
+                console.log('Valid click 2');
+                playerTwo.board.receiveHit([i, j]);
+                render.update(playerTwo);
+                render.currentPlayer = 2;
+              }
             }
           }
         }

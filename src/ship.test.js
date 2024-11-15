@@ -157,8 +157,8 @@ test('Report if all sunk', () => {
 });
 
 test('Create New Player', () => {
-  const player1 = new Player();
-  const player2 = new Player();
+  const player1 = new Player('playerOne');
+  const player2 = new Player('playerTwo');
   expect(player1.board.board).toEqual([
     ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
     ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
@@ -185,4 +185,6 @@ test('Create New Player', () => {
   ]);
   expect(player1.board.placedShips).toEqual([]);
   expect(player2.board.placedShips).toEqual([]);
+  expect(player1.name).toBe('playerOne');
+  expect(player2.name).toBe('playerTwo');
 });

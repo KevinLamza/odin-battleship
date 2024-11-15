@@ -7,6 +7,7 @@ const DOM = (function () {
 })();
 
 export const render = {
+  currentPlayer: 1,
   init() {
     // const DOM = fetchDom();
     for (let i = 0; i < 10; i++) {
@@ -26,5 +27,40 @@ export const render = {
       }
     }
   },
-  update() {},
+  update(player) {
+    if (player.name === 'playerOne') {
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let gridCell = document.querySelector('#P1' + i + j);
+          // console.log(gridCell);
+          if (player.board.board[i][j] === 'E') {
+            gridCell.setAttribute('class', 'cell empty');
+          } else if (player.board.board[i][j] === 'M') {
+            gridCell.setAttribute('class', 'cell missed');
+          } else if (player.board.board[i][j] === 'H') {
+            gridCell.setAttribute('class', 'cell hit');
+          } else {
+            gridCell.setAttribute('class', 'cell ship');
+          }
+        }
+      }
+    }
+    if (player.name === 'playerTwo') {
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let gridCell = document.querySelector('#P2' + i + j);
+          // console.log(gridCell);
+          if (player.board.board[i][j] === 'E') {
+            gridCell.setAttribute('class', 'cell empty');
+          } else if (player.board.board[i][j] === 'M') {
+            gridCell.setAttribute('class', 'cell missed');
+          } else if (player.board.board[i][j] === 'H') {
+            gridCell.setAttribute('class', 'cell hit');
+          } else {
+            gridCell.setAttribute('class', 'cell ship');
+          }
+        }
+      }
+    }
+  },
 };
