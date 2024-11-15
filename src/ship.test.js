@@ -84,3 +84,73 @@ test('Place ship', () => {
     ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
   ]);
 });
+
+test('Receive hit', () => {
+  // Test Setup
+  let gameboard = new Gameboard();
+  gameboard.place([
+    [0, 0],
+    [0, 1],
+    [0, 2],
+    [0, 3],
+  ]);
+  gameboard.place([
+    [1, 0],
+    [1, 1],
+    [1, 2],
+    [1, 3],
+  ]);
+
+  // First Hit
+  gameboard.receiveHit([0, 2]);
+  expect(gameboard.board).toEqual([
+    ['0', '0', 'H', '0', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['1', '1', '1', '1', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+  ]);
+  expect(gameboard.placedShips[0].hitsTaken).toBe(1);
+
+  // Second Hit
+  gameboard.receiveHit([4, 2]);
+  expect(gameboard.board).toEqual([
+    ['0', '0', 'H', '0', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['1', '1', '1', '1', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'M', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+  ]);
+});
+
+test('Report if all sunk', () => {
+  // Test Setup
+  let gameboard = new Gameboard();
+  gameboard.place([
+    [0, 0],
+    [0, 1],
+  ]);
+  gameboard.place([
+    [1, 2],
+    [1, 3],
+  ]);
+  gameboard.receiveHit([0, 0]);
+  gameboard.receiveHit([0, 1]);
+
+  // Test if all ships sunken
+  expect(gameboard.allSunk()).toBe(false);
+
+  gameboard.receiveHit([1, 2]);
+  gameboard.receiveHit([1, 3]);
+  expect(gameboard.allSunk()).toBe(true);
+});

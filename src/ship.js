@@ -31,12 +31,30 @@ export class Gameboard {
   }
   place(array) {
     this.placedShips.push(new Ship(array.length));
-    console.log(this.placedShips);
+    // console.log(this.placedShips);
     for (let i = 0; i < array.length; i++) {
       this.board[array[i][0]][array[i][1]] = (
         this.placedShips.length - 1
       ).toString();
     }
     return this.board;
+  }
+  receiveHit(array) {
+    if (this.board[array[0]][array[1]] === 'E') {
+      this.board[array[0]][array[1]] = 'M';
+    } else {
+      this.placedShips[Number(this.board[array[0]][array[1]])].hit();
+      this.board[array[0]][array[1]] = 'H';
+    }
+    return this.board;
+  }
+  allSunk() {
+    let status = true;
+    for (let ship of this.placedShips) {
+      if (ship.isSunk() === false) {
+        status = false;
+      }
+    }
+    return status;
   }
 }
