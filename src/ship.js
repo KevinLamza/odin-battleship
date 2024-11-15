@@ -58,3 +58,9 @@ export class Gameboard {
     return status;
   }
 }
+
+export class Player {
+  constructor() {
+    this.board = new Gameboard();
+  }
+}
