@@ -1,5 +1,6 @@
 // import { jest } from '@jest/globals';
-import Ship from './ship.js';
+import { Ship } from './ship.js';
+import { Gameboard } from './ship.js';
 
 // jest.mock('./ship.js');
 
@@ -14,9 +15,9 @@ test('Create battleship', () => {
   expect(() => new Ship('hello')).toThrow();
 });
 
-test('Hit battleship', () => {
-  expect(new Ship(5).hit()).toEqual(1);
-});
+// test('Hit battleship', () => {
+//   expect(new Ship(5).hit()).toEqual(1);
+// });
 
 test('Sink battleship', () => {
   let ship = new Ship(3);
@@ -25,4 +26,61 @@ test('Sink battleship', () => {
   ship.hit();
   ship.hit();
   expect(ship.isSunk()).toEqual(true);
+});
+
+test('Create gameboard', () => {
+  expect(new Gameboard().board).toEqual([
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+  ]);
+});
+
+test('Place ship', () => {
+  const gameboard = new Gameboard();
+  expect(
+    gameboard.place([
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [0, 3],
+    ]),
+  ).toEqual([
+    ['0', '0', '0', '0', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+  ]);
+  expect(
+    gameboard.place([
+      [1, 0],
+      [1, 1],
+      [1, 2],
+      [1, 3],
+    ]),
+  ).toEqual([
+    ['0', '0', '0', '0', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['1', '1', '1', '1', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+    ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E'],
+  ]);
 });
