@@ -54,6 +54,9 @@ import { DOM } from './render.js';
               console.log('Valid click 1');
               playerOne.board.receiveHit([i, j]);
               render.update(playerOne);
+              if (playerOne.board.allSunk() === true) {
+                console.log('Player 2 won!');
+              }
               render.currentPlayer = 1;
             }
           } else if (event.target.matches('#P2' + i + j)) {
@@ -62,6 +65,9 @@ import { DOM } from './render.js';
                 console.log('Valid click 2');
                 playerTwo.board.receiveHit([i, j]);
                 render.update(playerTwo);
+                if (playerTwo.board.allSunk() === true) {
+                  console.log('Player 1 won!');
+                }
                 render.currentPlayer = 2;
               }
             }
