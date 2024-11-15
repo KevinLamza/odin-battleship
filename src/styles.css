@@ -51,3 +51,51 @@ p, h1, h2, h3, h4, h5, h6 {
 #root, #__next {
   isolation: isolate;
 }
+
+.container {
+  width: 800px;
+  margin: auto;
+  margin-top: 200px;
+}
+
+.title {
+  font-size:32px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.gameBoard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50px 1fr;
+  gap: 10px;
+}
+
+.board {
+  width: 400px;
+  height: 400px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 2px;
+}
+
+.cell:hover {
+  background-color: orange;
+}
+
+.empty {
+  background-color: lightblue;
+}
+
+.ship {
+  background-color: lightgray;
+}
+
+.hit {
+  background-color: salmon;
+}
+
+.missed {
+  background-color: aqua;
+}
