@@ -1,15 +1,28 @@
-const DOM = (function () {
+export function fetchDom() {
   const currentTurn = document.querySelector('.currentTurn');
   const playerOneBoard = document.querySelector('.board.playerOne');
   const playerTwoBoard = document.querySelector('.board.playerTwo');
 
-  return { currentTurn, playerOneBoard, playerTwoBoard };
-})();
+  const dialog = document.querySelector('dialog');
+  const announcement = document.querySelector('.announcement');
+  const resetButton = document.querySelector('.resetButton');
+  const newGameButton = document.querySelector('.newGameButton');
+
+  return {
+    currentTurn,
+    playerOneBoard,
+    playerTwoBoard,
+    dialog,
+    announcement,
+    resetButton,
+    newGameButton,
+  };
+}
 
 export const render = {
   currentPlayer: 1,
   init() {
-    // const DOM = fetchDom();
+    const DOM = fetchDom();
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
         let gridCell = document.createElement('div');
@@ -62,5 +75,20 @@ export const render = {
         }
       }
     }
+  },
+  gameOver(player) {
+    const DOM = fetchDom();
+    DOM.dialog.showModal();
+    DOM.announcement.textContent = player + ' won the game!';
+  },
+  clear() {
+    const DOM = fetchDom();
+    while (DOM.playerOneBoard.firstChild) {
+      DOM.playerOneBoard.removeChild(DOM.playerOneBoard.firstChild);
+    }
+    while (DOM.playerTwoBoard.firstChild) {
+      DOM.playerTwoBoard.removeChild(DOM.playerTwoBoard.firstChild);
+    }
+    this.currentPlayer = 1;
   },
 };

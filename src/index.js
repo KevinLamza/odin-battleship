@@ -12,12 +12,12 @@ import { Ship } from './ship.js';
 import { Gameboard } from './ship.js';
 import { Player } from './ship.js';
 import { render } from './render.js';
-import { DOM } from './render.js';
+import { fetchDom } from './render.js';
 
-(function () {
+function init() {
   render.init();
-  const playerOne = new Player('playerOne');
-  const playerTwo = new Player('playerTwo');
+  let playerOne = new Player('playerOne');
+  let playerTwo = new Player('playerTwo');
 
   playerOne.board.place([
     [0, 0],
@@ -44,6 +44,7 @@ import { DOM } from './render.js';
   render.update(playerOne);
   render.update(playerTwo);
 
+  const DOM = fetchDom();
   document.addEventListener(
     'click',
     function (event) {
@@ -56,6 +57,7 @@ import { DOM } from './render.js';
               render.update(playerOne);
               if (playerOne.board.allSunk() === true) {
                 console.log('Player 2 won!');
+                render.gameOver('Player 2');
               }
               render.currentPlayer = 1;
             }
@@ -67,6 +69,7 @@ import { DOM } from './render.js';
                 render.update(playerTwo);
                 if (playerTwo.board.allSunk() === true) {
                   console.log('Player 1 won!');
+                  render.gameOver('Player 1');
                 }
                 render.currentPlayer = 2;
               }
@@ -77,4 +80,37 @@ import { DOM } from './render.js';
     },
     false,
   );
-})();
+  DOM.newGameButton.addEventListener('click', function (event) {
+    DOM.dialog.close();
+    render.clear();
+    render.init();
+    playerOne = new Player('playerOne');
+    playerTwo = new Player('playerTwo');
+    playerOne.board.place([
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [0, 3],
+    ]);
+    playerOne.board.place([
+      [2, 0],
+      [2, 1],
+      [2, 2],
+    ]);
+    playerTwo.board.place([
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [0, 3],
+    ]);
+    playerTwo.board.place([
+      [2, 0],
+      [2, 1],
+      [2, 2],
+    ]);
+    render.update(playerOne);
+    render.update(playerTwo);
+  });
+}
+
+init();
