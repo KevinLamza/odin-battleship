@@ -53,25 +53,27 @@ function init() {
           if (event.target.matches('#P1' + i + j)) {
             if (render.currentPlayer === 2) {
               console.log('Valid click 1');
-              playerOne.board.receiveHit([i, j]);
-              render.update(playerOne);
+              if (playerOne.board.receiveHit([i, j])) {
+                render.update(playerOne);
+                render.currentPlayer = 1;
+              }
               if (playerOne.board.allSunk() === true) {
                 console.log('Player 2 won!');
                 render.gameOver('Player 2');
               }
-              render.currentPlayer = 1;
             }
           } else if (event.target.matches('#P2' + i + j)) {
             if (event.target.matches('#P2' + i + j)) {
               if (render.currentPlayer === 1) {
                 console.log('Valid click 2');
-                playerTwo.board.receiveHit([i, j]);
-                render.update(playerTwo);
+                if (playerTwo.board.receiveHit([i, j])) {
+                  render.update(playerTwo);
+                  render.currentPlayer = 2;
+                }
                 if (playerTwo.board.allSunk() === true) {
                   console.log('Player 1 won!');
                   render.gameOver('Player 1');
                 }
-                render.currentPlayer = 2;
               }
             }
           }

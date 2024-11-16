@@ -42,6 +42,11 @@ export class Gameboard {
   receiveHit(array) {
     if (this.board[array[0]][array[1]] === 'E') {
       this.board[array[0]][array[1]] = 'M';
+    } else if (
+      this.board[array[0]][array[1]] === 'M' ||
+      this.board[array[0]][array[1]] === 'H'
+    ) {
+      return false;
     } else {
       this.placedShips[Number(this.board[array[0]][array[1]])].hit();
       this.board[array[0]][array[1]] = 'H';
