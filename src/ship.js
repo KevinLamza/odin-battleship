@@ -67,14 +67,15 @@ export class Gameboard {
     let y = Math.floor(Math.random() * 10);
     return [x, y];
   }
-  randomizedPlaceShips() {
-    // 1x5, 2x4, 3x3, 4x2
-    let length = 5;
+  randomizedPlaceSingleShip(length, invalidFields) {
     let run = true;
     let fullArray = [];
     let startPoint;
     let direction;
+    let checkFields;
+    let invalid;
     while (run) {
+      checkFields = structuredClone(invalidFields);
       startPoint = this.randomizeHit();
       direction = Math.floor(Math.random() * 4);
       fullArray = [];
@@ -97,9 +98,6 @@ export class Gameboard {
             y = startPoint[1] - i;
           }
           if (x < 0 || y < 0 || x > 9 || y > 9) {
-            console.log(x);
-            console.log(y);
-            console.log(direction);
             return false;
           }
           fullArray.push([x, y]);
@@ -109,10 +107,42 @@ export class Gameboard {
       if (valid === false) {
         continue;
       }
+      for (let item1 of fullArray) {
+        for (let item2 of checkFields) {
+          if (JSON.stringify(item1) === JSON.stringify(item2)) {
+            // alert(JSON.stringify(item1) + ' ' + JSON.stringify(item2));
+            valid = false;
+          }
+        }
+      }
+      if (valid === false) {
+        continue;
+      }
       run = !run;
+      for (let item of fullArray) {
+        checkFields.push(item);
+        checkFields.push([item[0] + 1, item[1]]);
+        checkFields.push([item[0] - 1, item[1]]);
+        checkFields.push([item[0], item[1] + 1]);
+        checkFields.push([item[0], item[1] - 1]);
+      }
     }
-    console.log(fullArray);
-    return fullArray;
+    // console.log(checkFields);
+    return { fullArray, checkFields };
+  }
+  randomizedPlaceShips() {
+    // 1x5, 2x4, 3x3, 4x2
+    let invalidFields = [];
+
+    // 1x5
+    let result = this.randomizedPlaceSingleShip(5, invalidFields);
+    invalidFields = result['checkFields'];
+    this.place(result['fullArray']);
+
+    // 1x4
+    result = this.randomizedPlaceSingleShip(4, invalidFields);
+    invalidFields = result['checkFields'];
+    this.place(result['fullArray']);
   }
 }
 

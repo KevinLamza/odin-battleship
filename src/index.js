@@ -30,7 +30,10 @@ function init() {
   //   [2, 1],
   //   [2, 2],
   // ]);
-  playerOne.board.place(playerOne.board.randomizedPlaceShips());
+
+  //playerOne.board.place(playerOne.board.randomizedPlaceShips());
+  playerOne.board.randomizedPlaceShips();
+
   playerTwo.board.place([
     [0, 0],
     [0, 1],
