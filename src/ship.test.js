@@ -188,3 +188,11 @@ test('Create New Player', () => {
   expect(player1.name).toBe('playerOne');
   expect(player2.name).toBe('playerTwo');
 });
+
+test('Randomize Hit', () => {
+  let array = new Gameboard().randomizeHit();
+  expect(array[0]).toBeGreaterThanOrEqual(0);
+  expect(array[0]).toBeLessThanOrEqual(9);
+  expect(array[1]).toBeGreaterThanOrEqual(0);
+  expect(array[1]).toBeLessThanOrEqual(9);
+});

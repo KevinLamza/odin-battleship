@@ -50,25 +50,44 @@ function init() {
     function (event) {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
-          if (event.target.matches('#P1' + i + j)) {
-            if (render.currentPlayer === 2) {
-              console.log('Valid click 1');
-              if (playerOne.board.receiveHit([i, j])) {
-                render.update(playerOne);
-                render.currentPlayer = 1;
-              }
-              if (playerOne.board.allSunk() === true) {
-                console.log('Player 2 won!');
-                render.gameOver('Player 2');
-              }
-            }
-          } else if (event.target.matches('#P2' + i + j)) {
+          // if (event.target.matches('#P1' + i + j)) {
+          //   if (render.currentPlayer === 2) {
+          //     console.log('Valid click 1');
+          //     if (playerOne.board.receiveHit([i, j])) {
+          //       render.update(playerOne);
+          //       render.currentPlayer = 1;
+          //     }
+          //     if (playerOne.board.allSunk() === true) {
+          //       console.log('Player 2 won!');
+          //       render.gameOver('Player 2');
+          //     }
+          //   }
+          // } else
+          if (event.target.matches('#P2' + i + j)) {
             if (event.target.matches('#P2' + i + j)) {
               if (render.currentPlayer === 1) {
                 console.log('Valid click 2');
                 if (playerTwo.board.receiveHit([i, j])) {
                   render.update(playerTwo);
                   render.currentPlayer = 2;
+                  let run = true;
+                  while (run) {
+                    if (
+                      playerOne.board.receiveHit(playerTwo.board.randomizeHit())
+                    ) {
+                      run = !run;
+                    }
+                  }
+                  render.update(playerOne);
+                  render.currentPlayer = 1;
+                  if (playerOne.board.allSunk() === true) {
+                    console.log('Player 2 won!');
+                    render.gameOver('Player 2');
+                  }
+
+                  // hier automatisch computer turn einfügen und zweiten abschnitt oben für P2 auskommentieren
+                  // while schleife die solange läuft; bis receiveHit true returned
+                  // und eine sekunde wartezeit einfügen, damit man beobachten kannq
                 }
                 if (playerTwo.board.allSunk() === true) {
                   console.log('Player 1 won!');
