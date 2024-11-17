@@ -196,3 +196,14 @@ test('Randomize Hit', () => {
   expect(array[1]).toBeGreaterThanOrEqual(0);
   expect(array[1]).toBeLessThanOrEqual(9);
 });
+
+// TESTED, but now commented, due to randomizing factor in final function
+// test('Randomized Ship Placement', () => {
+//   expect(new Gameboard().randomizedPlaceShips()).toEqual([
+//     [4, 4],
+//     [3, 4],
+//     [2, 4],
+//     [1, 4],
+//     [0, 4],
+//   ]);
+// });

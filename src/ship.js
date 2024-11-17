@@ -67,6 +67,53 @@ export class Gameboard {
     let y = Math.floor(Math.random() * 10);
     return [x, y];
   }
+  randomizedPlaceShips() {
+    // 1x5, 2x4, 3x3, 4x2
+    let length = 5;
+    let run = true;
+    let fullArray = [];
+    let startPoint;
+    let direction;
+    while (run) {
+      startPoint = this.randomizeHit();
+      direction = Math.floor(Math.random() * 4);
+      fullArray = [];
+      fullArray.push(startPoint);
+      let valid = (() => {
+        for (let i = 1; i < length; i++) {
+          let x;
+          let y;
+          if (direction === 0) {
+            x = startPoint[0] - i;
+            y = startPoint[1];
+          } else if (direction === 1) {
+            x = startPoint[0];
+            y = startPoint[1] + i;
+          } else if (direction === 2) {
+            x = startPoint[0] + i;
+            y = startPoint[1];
+          } else if (direction === 3) {
+            x = startPoint[0];
+            y = startPoint[1] - i;
+          }
+          if (x < 0 || y < 0 || x > 9 || y > 9) {
+            console.log(x);
+            console.log(y);
+            console.log(direction);
+            return false;
+          }
+          fullArray.push([x, y]);
+        }
+        return true;
+      })();
+      if (valid === false) {
+        continue;
+      }
+      run = !run;
+    }
+    console.log(fullArray);
+    return fullArray;
+  }
 }
 
 export class Player {
