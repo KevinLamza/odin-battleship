@@ -19,32 +19,10 @@ function init() {
   let playerOne = new Player('playerOne');
   let playerTwo = new Player('playerTwo');
 
-  // playerOne.board.place([
-  //   [0, 0],
-  //   [0, 1],
-  //   [0, 2],
-  //   [0, 3],
-  // ]);
-  // playerOne.board.place([
-  //   [2, 0],
-  //   [2, 1],
-  //   [2, 2],
-  // ]);
-
   //playerOne.board.place(playerOne.board.randomizedPlaceShips());
   playerOne.board.randomizedPlaceShips();
+  playerTwo.board.randomizedPlaceShips();
 
-  playerTwo.board.place([
-    [0, 0],
-    [0, 1],
-    [0, 2],
-    [0, 3],
-  ]);
-  playerTwo.board.place([
-    [2, 0],
-    [2, 1],
-    [2, 2],
-  ]);
   render.update(playerOne);
   render.update(playerTwo);
 
@@ -105,28 +83,10 @@ function init() {
     render.init();
     playerOne = new Player('playerOne');
     playerTwo = new Player('playerTwo');
-    playerOne.board.place([
-      [0, 0],
-      [0, 1],
-      [0, 2],
-      [0, 3],
-    ]);
-    playerOne.board.place([
-      [2, 0],
-      [2, 1],
-      [2, 2],
-    ]);
-    playerTwo.board.place([
-      [0, 0],
-      [0, 1],
-      [0, 2],
-      [0, 3],
-    ]);
-    playerTwo.board.place([
-      [2, 0],
-      [2, 1],
-      [2, 2],
-    ]);
+
+    playerOne.board.randomizedPlaceShips();
+    playerTwo.board.randomizedPlaceShips();
+
     render.update(playerOne);
     render.update(playerTwo);
   });

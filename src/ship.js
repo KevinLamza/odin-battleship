@@ -67,18 +67,17 @@ export class Gameboard {
     let y = Math.floor(Math.random() * 10);
     return [x, y];
   }
-  randomizedPlaceSingleShip(length, invalidFields) {
+  randomizedPlaceSingleShip(length, previousFields) {
     let run = true;
     let fullArray = [];
-    let startPoint;
-    let direction;
     let checkFields;
-    let invalid;
     while (run) {
-      checkFields = structuredClone(invalidFields);
-      startPoint = this.randomizeHit();
-      direction = Math.floor(Math.random() * 4);
+      let startPoint = this.randomizeHit();
+      let direction = Math.floor(Math.random() * 4);
+      checkFields = structuredClone(previousFields);
       fullArray = [];
+
+      // randomize a starting point and a direction; move in a direction and add the points to an array
       fullArray.push(startPoint);
       let valid = (() => {
         for (let i = 1; i < length; i++) {
@@ -97,6 +96,7 @@ export class Gameboard {
             x = startPoint[0];
             y = startPoint[1] - i;
           }
+          // make sure that no point is out of grid
           if (x < 0 || y < 0 || x > 9 || y > 9) {
             return false;
           }
@@ -107,10 +107,11 @@ export class Gameboard {
       if (valid === false) {
         continue;
       }
+
+      // check if the calculated array contains elements, that are not valid
       for (let item1 of fullArray) {
         for (let item2 of checkFields) {
           if (JSON.stringify(item1) === JSON.stringify(item2)) {
-            // alert(JSON.stringify(item1) + ' ' + JSON.stringify(item2));
             valid = false;
           }
         }
@@ -119,6 +120,8 @@ export class Gameboard {
         continue;
       }
       run = !run;
+
+      // after evaluating a valid array, add new fields to the invalid fields array and return them
       for (let item of fullArray) {
         checkFields.push(item);
         checkFields.push([item[0] + 1, item[1]]);
@@ -131,50 +134,20 @@ export class Gameboard {
         checkFields.push([item[0] - 1, item[1] - 1]);
       }
     }
-    // console.log(checkFields);
     return { fullArray, checkFields };
   }
   randomizedPlaceShips() {
     // 1x5, 2x4, 3x3, 4x2
+    let ships = [5, 4, 4, 3, 3, 3, 2, 2, 2, 2];
     let invalidFields = [];
     let result;
 
-    let ships = [5, 4, 4, 3, 3, 3, 2, 2, 2, 2];
-
+    // place a single ship randomly and keep track of the invalid fields; loop;
     for (let i = 0; i < ships.length; i++) {
       result = this.randomizedPlaceSingleShip(ships[i], invalidFields);
       invalidFields = result['checkFields'];
       this.place(result['fullArray']);
     }
-
-    // // 1x5
-    // let result = this.randomizedPlaceSingleShip(5, invalidFields);
-    // invalidFields = result['checkFields'];
-    // this.place(result['fullArray']);
-
-    // // 2x4
-    // result = this.randomizedPlaceSingleShip(4, invalidFields);
-    // invalidFields = result['checkFields'];
-    // this.place(result['fullArray']);
-
-    // result = this.randomizedPlaceSingleShip(4, invalidFields);
-    // invalidFields = result['checkFields'];
-    // this.place(result['fullArray']);
-
-    // // 3x3
-    // result = this.randomizedPlaceSingleShip(3, invalidFields);
-    // invalidFields = result['checkFields'];
-    // this.place(result['fullArray']);
-
-    // result = this.randomizedPlaceSingleShip(3, invalidFields);
-    // invalidFields = result['checkFields'];
-    // this.place(result['fullArray']);
-
-    // result = this.randomizedPlaceSingleShip(3, invalidFields);
-    // invalidFields = result['checkFields'];
-    // this.place(result['fullArray']);
-
-    // // 4x2
   }
 }
 
