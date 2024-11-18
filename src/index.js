@@ -49,6 +49,10 @@ function init() {
             if (render.currentPlayer === 1) {
               console.log('Valid click 2');
               if (playerTwo.board.receiveHit([i, j])) {
+                if (playerTwo.board.allSunk() === true) {
+                  console.log('Player 1 won!');
+                  render.gameOver('Player 1');
+                }
                 render.update(playerTwo);
                 render.currentPlayer = 2;
                 let run = true;
@@ -59,16 +63,12 @@ function init() {
                     run = !run;
                   }
                 }
-                render.update(playerOne);
-                render.currentPlayer = 1;
                 if (playerOne.board.allSunk() === true) {
                   console.log('Player 2 won!');
                   render.gameOver('Player 2');
                 }
-              }
-              if (playerTwo.board.allSunk() === true) {
-                console.log('Player 1 won!');
-                render.gameOver('Player 1');
+                render.update(playerOne);
+                render.currentPlayer = 1;
               }
             }
           }

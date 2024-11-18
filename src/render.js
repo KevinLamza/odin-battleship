@@ -11,6 +11,38 @@ export function fetchDom() {
   const playerOneList = document.querySelector('.playerOneList');
   const playerTwoList = document.querySelector('.playerOneList');
 
+  const ship0player1 = document.querySelector('#ship0player1');
+  const ship1player1 = document.querySelector('#ship1player1');
+  const ship2player1 = document.querySelector('#ship2player1');
+  const ship3player1 = document.querySelector('#ship3player1');
+  const ship4player1 = document.querySelector('#ship4player1');
+  const ship5player1 = document.querySelector('#ship5player1');
+  const ship6player1 = document.querySelector('#ship6player1');
+  const ship7player1 = document.querySelector('#ship7player1');
+  const ship8player1 = document.querySelector('#ship8player1');
+  const ship9player1 = document.querySelector('#ship9player1');
+
+  const shipsPlayer1 = [];
+  for (let i = 0; i < 10; i++) {
+    shipsPlayer1[i] = document.querySelector('#ship' + i + 'player1');
+  }
+
+  const ship0player2 = document.querySelector('#ship0player2');
+  const ship1player2 = document.querySelector('#ship1player2');
+  const ship2player2 = document.querySelector('#ship2player2');
+  const ship3player2 = document.querySelector('#ship3player2');
+  const ship4player2 = document.querySelector('#ship4player2');
+  const ship5player2 = document.querySelector('#ship5player2');
+  const ship6player2 = document.querySelector('#ship6player2');
+  const ship7player2 = document.querySelector('#ship7player2');
+  const ship8player2 = document.querySelector('#ship8player2');
+  const ship9player2 = document.querySelector('#ship9player2');
+
+  const shipsPlayer2 = [];
+  for (let i = 0; i < 10; i++) {
+    shipsPlayer2[i] = document.querySelector('#ship' + i + 'player2');
+  }
+
   return {
     currentTurn,
     playerOneBoard,
@@ -21,6 +53,28 @@ export function fetchDom() {
     newGameButton,
     playerOneList,
     playerTwoList,
+    ship0player1,
+    ship1player1,
+    ship2player1,
+    ship3player1,
+    ship4player1,
+    ship5player1,
+    ship6player1,
+    ship7player1,
+    ship8player1,
+    ship9player1,
+    ship0player2,
+    ship1player2,
+    ship2player2,
+    ship3player2,
+    ship4player2,
+    ship5player2,
+    ship6player2,
+    ship7player2,
+    ship8player2,
+    ship9player2,
+    shipsPlayer1,
+    shipsPlayer2,
   };
 }
 
@@ -63,10 +117,12 @@ export const render = {
           }
         }
       }
+      for (let i = 0; i < player.board.placedShips.length; i++) {
+        if (player.board.placedShips[i]['sunk'] === true) {
+          DOM.shipsPlayer1[i].setAttribute('class', 'crossed');
+        }
+      }
     }
-    // for (let i=0;i<player.board.placedShips.length;i++) {
-    //   if (player.board.placedShips[i]['sunk'] === true)
-    // }
     if (player.name === 'playerTwo') {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
@@ -81,6 +137,11 @@ export const render = {
           } else {
             gridCell.setAttribute('class', 'cell ship hidden');
           }
+        }
+      }
+      for (let i = 0; i < player.board.placedShips.length; i++) {
+        if (player.board.placedShips[i]['sunk'] === true) {
+          DOM.shipsPlayer2[i].setAttribute('class', 'crossed');
         }
       }
     }
