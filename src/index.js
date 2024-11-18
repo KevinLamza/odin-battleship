@@ -79,7 +79,7 @@ function init() {
   );
   DOM.newGameButton.addEventListener('click', function (event) {
     DOM.dialog.close();
-    render.clear();
+    render.clear(playerOne, playerTwo);
     render.init();
     playerOne = new Player('playerOne');
     playerTwo = new Player('playerTwo');
@@ -91,7 +91,7 @@ function init() {
     render.update(playerTwo);
   });
   DOM.resetButton.addEventListener('click', function (event) {
-    render.clear();
+    render.clear(playerOne, playerTwo);
     playerOne = new Player('playerOne');
     playerTwo = new Player('playerTwo');
     render.init();

@@ -151,13 +151,19 @@ export const render = {
     DOM.dialog.showModal();
     DOM.announcement.textContent = player + ' won the game!';
   },
-  clear() {
+  clear(player1, player2) {
     const DOM = fetchDom();
     while (DOM.playerOneBoard.firstChild) {
       DOM.playerOneBoard.removeChild(DOM.playerOneBoard.firstChild);
     }
     while (DOM.playerTwoBoard.firstChild) {
       DOM.playerTwoBoard.removeChild(DOM.playerTwoBoard.firstChild);
+    }
+    for (let i = 0; i < player1.board.placedShips.length; i++) {
+      DOM.shipsPlayer1[i].setAttribute('class', 'shipListItem');
+    }
+    for (let i = 0; i < player2.board.placedShips.length; i++) {
+      DOM.shipsPlayer2[i].setAttribute('class', 'shipListItem');
     }
     this.currentPlayer = 1;
   },
