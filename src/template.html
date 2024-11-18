@@ -9,7 +9,7 @@
     <div class="container">
       <div class="title">BATTLESHIP</div>
       <div class="game">
-        <div class="currentTurn">Player 1: Place your ships</div>
+        <div class="currentTurn"></div>
         <div class="gameBoard">
           <div class="playerOneTitle">Player 1</div>
           <div class="playerTwoTitle">Player 2</div>
@@ -22,7 +22,41 @@
             <button class="newGameButton">Start a new Game</button>
           </dialog>
         </div>
-        <div class="resetButton"></div>
+        <button class="resetButton">Reset Game</button>
+        <div class="shipLists">
+          <div>
+            <p>Ships:</p>
+            <ul class="playerOneList">
+              <!-- <li>1x Battleship (5)</li> -->
+               <li class=shipListItem id="ship0player1">Carrier (5)</li>
+               <li class=shipListItem id="ship1player1">Battleship (4)</li>
+               <li class=shipListItem id="ship2player1">Battleship (4)</li>
+               <li class=shipListItem id="ship3player1">Cruiser (3)</li>
+               <li class=shipListItem id="ship4player1">Cruiser (3)</li>
+               <li class=shipListItem id="ship5player1">Cruiser (3)</li>
+               <li class=shipListItem id="ship6player1">Destroyer (2)</li>
+               <li class=shipListItem id="ship7player1">Destroyer (2)</li>
+               <li class=shipListItem id="ship8player1">Destroyer (2)</li>
+               <li class=shipListItem id="ship9player1">Destroyer (2)</li>
+            </ul>
+          </div>
+          <div>
+            <p>Ships:</p>
+            <ul class="playerTwoList">
+              <!-- <li>1x Battleship (5)</li> -->
+              <li class=shipListItem id="ship0player2">Carrier (5)</li>
+              <li class=shipListItem id="ship1player2">Battleship (4)</li>
+              <li class=shipListItem id="ship2player2">Battleship (4)</li>
+              <li class=shipListItem id="ship3player2">Cruiser (3)</li>
+              <li class=shipListItem id="ship4player2">Cruiser (3)</li>
+              <li class=shipListItem id="ship5player2">Cruiser (3)</li>
+              <li class=shipListItem id="ship6player2">Destroyer (2)</li>
+              <li class=shipListItem id="ship7player2">Destroyer (2)</li>
+              <li class=shipListItem id="ship8player2">Destroyer (2)</li>
+              <li class=shipListItem id="ship9player2">Destroyer (2)</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 </body>

@@ -134,6 +134,7 @@ export class Gameboard {
         checkFields.push([item[0] - 1, item[1] - 1]);
       }
     }
+    console.log(this.placedShips);
     return { fullArray, checkFields };
   }
   randomizedPlaceShips() {

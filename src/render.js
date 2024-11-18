@@ -8,6 +8,9 @@ export function fetchDom() {
   const resetButton = document.querySelector('.resetButton');
   const newGameButton = document.querySelector('.newGameButton');
 
+  const playerOneList = document.querySelector('.playerOneList');
+  const playerTwoList = document.querySelector('.playerOneList');
+
   return {
     currentTurn,
     playerOneBoard,
@@ -16,6 +19,8 @@ export function fetchDom() {
     announcement,
     resetButton,
     newGameButton,
+    playerOneList,
+    playerTwoList,
   };
 }
 
@@ -41,6 +46,7 @@ export const render = {
     }
   },
   update(player) {
+    const DOM = fetchDom();
     if (player.name === 'playerOne') {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
@@ -58,6 +64,9 @@ export const render = {
         }
       }
     }
+    // for (let i=0;i<player.board.placedShips.length;i++) {
+    //   if (player.board.placedShips[i]['sunk'] === true)
+    // }
     if (player.name === 'playerTwo') {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
@@ -70,7 +79,7 @@ export const render = {
           } else if (player.board.board[i][j] === 'H') {
             gridCell.setAttribute('class', 'cell hit');
           } else {
-            gridCell.setAttribute('class', 'cell ship');
+            gridCell.setAttribute('class', 'cell ship hidden');
           }
         }
       }

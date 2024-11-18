@@ -15,9 +15,9 @@ import { render } from './render.js';
 import { fetchDom } from './render.js';
 
 function init() {
-  render.init();
   let playerOne = new Player('playerOne');
   let playerTwo = new Player('playerTwo');
+  render.init();
 
   //playerOne.board.place(playerOne.board.randomizedPlaceShips());
   playerOne.board.randomizedPlaceShips();
@@ -83,6 +83,18 @@ function init() {
     render.init();
     playerOne = new Player('playerOne');
     playerTwo = new Player('playerTwo');
+
+    playerOne.board.randomizedPlaceShips();
+    playerTwo.board.randomizedPlaceShips();
+
+    render.update(playerOne);
+    render.update(playerTwo);
+  });
+  DOM.resetButton.addEventListener('click', function (event) {
+    render.clear();
+    playerOne = new Player('playerOne');
+    playerTwo = new Player('playerTwo');
+    render.init();
 
     playerOne.board.randomizedPlaceShips();
     playerTwo.board.randomizedPlaceShips();
